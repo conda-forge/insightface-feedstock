@@ -13,12 +13,13 @@ build:
   entry_points:
     - insightface-cli=insightface.commands.insightface_cli:main
   script: {{ PYTHON }} -m pip install . -vv
-  number: 2
+  number: 3
   skip: True  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - {{ cdt('mesa-libgl-devel') }}  # [linux]
     - {{ cdt('mesa-dri-drivers') }}  # [linux]
@@ -49,7 +50,6 @@ requirements:
     - cython
     - albumentations
     - prettytable
-    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
