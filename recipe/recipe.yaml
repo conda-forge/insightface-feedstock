@@ -1,0 +1,68 @@
+schema_version: 1
+
+context:
+  name: insightface
+  version: "1.0.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/insightface-${{ version }}.tar.gz
+  sha256: 27af24891bbba470cb3573b366a0fcca8989fc8503c9f8f281e8cba6fd716075
+
+build:
+  number: 1
+  skip: win
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - insightface-cli=insightface.commands.insightface_cli:main
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler('cxx') }}
+  host:
+    - python
+    - setuptools
+    - numpy
+    - cython
+    - pypandoc
+    - pip
+    - if: linux
+      then: libgl-devel
+  run:
+    - python
+    - onnx
+    - onnxruntime
+    - opencv
+    - tqdm
+    - requests
+    - matplotlib-base
+    - pillow
+    - scipy
+    - scikit-learn
+    - scikit-image
+    - easydict
+    - cython
+    - albumentations
+    - prettytable
+
+tests:
+  - python:
+      imports:
+        - insightface
+      pip_check: false
+
+about:
+  summary: InsightFace Python Library
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/deepinsight/insightface
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
