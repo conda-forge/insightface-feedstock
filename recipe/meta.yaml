@@ -1,18 +1,18 @@
 {% set name = "insightface" %}
-{% set version = "1.0.1" %}
+{% set version = "2.0" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/insightface-{{ version }}.tar.gz
-  sha256: 27af24891bbba470cb3573b366a0fcca8989fc8503c9f8f281e8cba6fd716075
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/insightface-{{ version }}.tar.gz
+  sha256: b8d9884f2358c51d297edb499e0a1fd15854ee89ff21740fffe339b0db0f3a9f
 
 build:
   entry_points:
     - insightface-cli=insightface.commands.insightface_cli:main
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
   skip: true  # [win]
 
@@ -49,6 +49,8 @@ requirements:
 test:
   imports:
     - insightface
+  commands:
+    - insightface-cli --help
 
 about:
   home: https://github.com/deepinsight/insightface
