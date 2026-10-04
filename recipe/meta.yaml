@@ -1,13 +1,13 @@
 {% set name = "insightface" %}
-{% set version = "1.0.1" %}
+{% set version = "2.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/insightface-{{ version }}.tar.gz
-  sha256: 27af24891bbba470cb3573b366a0fcca8989fc8503c9f8f281e8cba6fd716075
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/insightface-{{ version }}.tar.gz
+  sha256: 776cbd36b70f5f2ae1a026101cfb80387f0b2280a0dbaf073f8d3ed69f554e01
 
 build:
   entry_points:
